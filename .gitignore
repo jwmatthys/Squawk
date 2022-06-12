@@ -1,0 +1,13 @@
+/.vscode
+/Assembly-CSharp.csproj
+/Library
+/Logs
+/Packages
+/ProjectSettings
+/Squawk.sln
+/Temp
+/Unity.2D.Sprite.Editor.csproj
+/Unity.2D.Tilemap.Editor.csproj
+/UnityEditor.UI.csproj
+/UnityEngine.UI.csproj
+/UserSettings
