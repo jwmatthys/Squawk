@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 8935384321246208944}
   - component: {fileID: 1615422541971650058}
   - component: {fileID: 7641365675451230025}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Bouncers
-  m_TagString: Ground
+  m_TagString: Bouncer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -340,7 +340,7 @@ GameObject:
   - component: {fileID: 3347815386105167463}
   - component: {fileID: 3347815386105167460}
   - component: {fileID: 3347815386105167461}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Water
   m_TagString: Water
   m_Icon: {fileID: 0}

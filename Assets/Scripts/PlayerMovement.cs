@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     Vector2 moveInput;
     Rigidbody2D myRigidbody;
     Animator myAnimator;
-    CapsuleCollider2D myBodyCollider;
+    CapsuleCollider2D myCollider;
     private float defaultGravity;
 
     [SerializeField] float walkSpeed = 2f;
@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
-        myBodyCollider = GetComponent<CapsuleCollider2D>();
+        myCollider = GetComponent<CapsuleCollider2D>();
     }
 
     void LateUpdate() {
