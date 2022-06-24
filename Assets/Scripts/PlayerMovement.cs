@@ -12,12 +12,16 @@ public class PlayerMovement : MonoBehaviour
     private float defaultGravity;
 
     [SerializeField] float walkSpeed = 2f;
+    [SerializeField] float jumpSpeed = 4f;
     [SerializeField] float initialJumpForce = 2f;
     [SerializeField] float incrementalJumpForce = 1f;
-    [SerializeField] float maxJumpButtonTime = 0.3f;
+    [SerializeField] float maxJumpButtonTime = 0.2f;
+    [SerializeField] bool movementEnabled = true;
+//    [SerializeField] float maxJumpSpeedTime = 0.3f;
     private bool jumpButtonPressed = false;
     private bool onGround = true;
     private float startJumpTime = -1f;
+    private float horizontalSpeed;
 
     // Start is called before the first frame update
     void Awake()
@@ -25,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
         myCollider = GetComponent<CapsuleCollider2D>();
+        horizontalSpeed = walkSpeed;
     }
 
     void LateUpdate() {
@@ -37,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
         {
             myAnimator.SetBool("isJumping", false);
             onGround = true;
+            horizontalSpeed = walkSpeed;
         }
     }
 
@@ -60,7 +66,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Walk()
     {
-        Vector2 playerVelocity = new Vector2(moveInput.x * walkSpeed, myRigidbody.velocity.y);
+        if (!movementEnabled) return;
+        Vector2 playerVelocity = new Vector2(moveInput.x * horizontalSpeed, myRigidbody.velocity.y);
         myRigidbody.velocity = playerVelocity;
 
         if (Mathf.Abs(moveInput.x) > Mathf.Epsilon)
@@ -77,12 +84,14 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
+        if (!movementEnabled) return;
         float elapsedTime = Time.time - startJumpTime;
         if (onGround && jumpButtonPressed)
         {
             Vector2 jumpVelocity = new Vector2(myRigidbody.velocity.x, initialJumpForce);
             myRigidbody.velocity = jumpVelocity;
             startJumpTime = Time.time;
+            horizontalSpeed = jumpSpeed;
         }
         else if (jumpButtonPressed && elapsedTime < maxJumpButtonTime)
         {
@@ -90,4 +99,7 @@ public class PlayerMovement : MonoBehaviour
             myRigidbody.AddForce(additionalJump, ForceMode2D.Impulse);
         }
     }
+
+    public void enableMovement() {movementEnabled = true;}
+    public void disableMovement() {movementEnabled = false;}
 }
